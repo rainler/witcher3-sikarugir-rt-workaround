@@ -2,6 +2,25 @@
 
 **Experimental. Tested on one M5 Mac with Ray Tracing on and Path Tracing off.** The tester confirmed that a save loaded into playable gameplay after applying the workaround. Long-duration stability and other hardware have not been established.
 
+## Download and Quick Start
+
+**[Download v0.1.0-preview.1 ZIP](https://github.com/rainler/witcher3-sikarugir-rt-workaround/releases/download/v0.1.0-preview.1/witcher3-sikarugir-rt-workaround-v0.1.0-preview.1.zip)** · [Release notes](https://github.com/rainler/witcher3-sikarugir-rt-workaround/releases/tag/v0.1.0-preview.1)
+
+This ZIP contains the installer and source. It builds the library on your Mac using Python 3 and Apple Command Line Tools; it is not a prebuilt application.
+
+1. Complete the [prerequisites](#prerequisites), including the separate RT-only toggle unlock. Set **Path Tracing off**, then fully exit the game and Windows Steam.
+2. Download and extract the ZIP. In Terminal, type `cd ` (with a space), drag the extracted folder into the Terminal window, and press Return.
+3. Check the setup, then install:
+
+   ```sh
+   python3 manage.py install --dry-run
+   python3 manage.py install
+   ```
+
+4. Launch as usual with **Ray Tracing on** and **Path Tracing off**, then load a save.
+
+For a wrapper in a different location, see [Install](#install). To remove the workaround, use [the uninstall command](#remove-the-workaround).
+
 ## Tested setup
 
 - Apple M5, 16 GB RAM
@@ -26,7 +45,7 @@ The compatibility library first forwards normal pipeline creation. If a `PTRGS_S
 
 The confirmed launch logged 66 normal RT pipeline compilations, seven SHARC substitutions and no subsequent pipeline failures. Its monitor observed no dispatch of the substituted kernel. This supports the assumption that the failing shaders were unused with PT off on the tested setup.
 
-The shared edition replaces account-specific paths with installer-supplied environment variables. It compiled and passed an isolated normal GPU dispatch test; its installer passed fixture checks. Full gameplay was confirmed with the original local edition, rather than a separate installation of this portable edition.
+The shared edition replaces account-specific paths with installer-supplied environment variables. It compiled and passed an isolated normal GPU dispatch test; its installer passed fixture checks. Full gameplay has been confirmed with the original local edition. A separate gameplay test of the portable edition has not been performed. See [validation details](docs/VALIDATION.md) for the exact scope.
 
 ## Prerequisites
 
@@ -89,3 +108,7 @@ Include `--wrapper` if you used a custom wrapper path. The script removes its ex
 Only the source and installer are distributed here. Apple renderer libraries, game executables, saves, personal logs and the other community projects are not included.
 
 Developed with Codex and tested by the person whose game had the failure. Independent reproduction reports are welcome.
+
+## License
+
+The source and installer in this repository are available under the [MIT License](LICENSE). The external game, renderer and community patches retain their respective licenses and are not included in this package.
